@@ -10,7 +10,7 @@ You need a new JWT each time you initialize the SDK. You can obtain a JWT in two
 
 #### Onfido's API
 
-The Onfido [API](https://onfido.com/documentation) exposes a JWT endpoint. See the API [documentation](https://onfido.com/documentation) for details. 
+The Onfido [API](https://onfido.com/documentation) exposes a JWT endpoint. See the API [documentation](https://onfido.com/documentation#json-web-tokens) for details. 
 
 #### Generate your own
 
