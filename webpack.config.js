@@ -5,6 +5,9 @@ var webpack = require('webpack')
 var env = process.env.NODE_ENV
 var config = {
   module: {
+    preLoaders: [
+        { test: /\.json$/, exclude: /node_modules/, loader: 'json'},
+    ],
     loaders: [
       { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
     ]

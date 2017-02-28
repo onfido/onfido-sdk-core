@@ -54,7 +54,7 @@
     "object-assign": "^4.0.1",
     "object-loops": "^0.8.0",
     "query-string": "^4.1.0",
-    "reconnectingwebsocket": "^1.0.0",
+    "robust-websocket": "0.2.1",
     "redux": "^3.4.0",
     "redux-watch": "^1.1.1",
     "reselect": "^2.5.1"
@@ -78,6 +78,7 @@
     "gitbook-cli": "^2.3.0",
     "glob": "^7.0.6",
     "isparta": "^4.0.0",
+    "json-loader": "^0.5.4",
     "mocha": "3.0.2",
     "rimraf": "^2.3.4",
     "source-map": "^0.5.5",

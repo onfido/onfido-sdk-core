@@ -6,6 +6,7 @@ import {
   supportsGetUserMedia
 } from '../utils/feature-detection'
 import * as constants from '../constants'
+import { version } from '../../package.json'
 
 const { setWebSocketSupport, setGumSupport } = actions
 
@@ -15,7 +16,7 @@ function setSupport() {
 }
 
 function constructUrl(jwt, socketUrl) {
-  const query = queryString.stringify({ jwt: jwt })
+  const query = queryString.stringify({ jwt, version })
   return `${socketUrl}?${query}`
 }
 

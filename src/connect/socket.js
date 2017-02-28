@@ -1,14 +1,14 @@
 import events from '../core/events'
 import { actions } from '../store/actions'
-import ReconnectingWebSocket from 'reconnectingwebsocket'
+import RobustWebSocket from 'robust-websocket'
 
 const { setWebSocketError, setAuthenticated } = actions
 
 export default class Socket {
 
   connect(url) {
-    const socket = new ReconnectingWebSocket(url)
-    socket.onerror = (e) => {
+    const socket = new RobustWebSocket(url)
+    socket.onerror = () => {
       events.emit('onError')
       setWebSocketError(true)
     }
@@ -16,6 +16,10 @@ export default class Socket {
       this.socket = socket
       this.onMessage()
       setAuthenticated(true)
+    }
+    socket.onclose = (closeEvent) => {
+      const message = 'Websockets connection closed.'
+      console.warn(`${message} Code: ${closeEvent.code} Reason: ${closeEvent.reason}`)
     }
   }
 
