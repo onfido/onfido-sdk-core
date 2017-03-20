@@ -11,7 +11,6 @@ const events = new EventEmitter()
 //more than once and inside of other functions too
 const getState = () => store.getState()
 const getCaptures = ()=> selectors.confirmedCaptures(getState())
-
 const getCapturesCompatible = () => mapKeys(getCaptures(), key => key + 'Capture')
 
 const subscribe = store.subscribe.bind(store)
@@ -32,16 +31,9 @@ const captureCallback = captures => {
 
 subscribeToStoreByWatching(selectors.confirmedCaptures, captureCallback)
 
-// TODO refactor the onComplete callback to fire when the flow is complete
-// rather than based on the state of the store.
-// subscribeToStoreByWatching(selectors.allCaptured, allCaptured => {
-//   if (allCaptured) events.emit('complete', getCapturesCompatible())
-// })
-
 subscribeToStoreByWatching(state => state.globals.authenticated, isAuthenticated => {
   if (isAuthenticated) events.emit('ready')
 })
-
 
 events.getCaptures = getCapturesCompatible
 
