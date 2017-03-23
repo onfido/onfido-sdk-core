@@ -1,15 +1,8 @@
 import events from '../core/events'
 import { actions } from '../store/actions'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
-import debounce from 'debounce'
 
 const { setWebSocketError, setAuthenticated } = actions
-
-//It should be easier to set the error mode than to bring it back to a normal mode
-//The reason for this is because if the two states are oscilating (in a reconnecting loop for example)
-//The bias should be for the error, since that kind of loop represents an actual connection problem
-const setError = () => setTimeout(setWebSocketError.bind(this, true), 2000)
-const unsetError = debounce(setWebSocketError.bind(this, false), 2000)
 
 export default class Socket {
   connect(url) {
@@ -25,11 +18,11 @@ export default class Socket {
       this.socket = socket
       this.onMessage()
       setAuthenticated(true)
-      unsetError()
+      setWebSocketError(false)
     },
     socket.onclose = () => {
       console.log('socket closed', socket.readyState)
-      setError()
+      setWebSocketError(true)
     }
   }
 
