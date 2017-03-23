@@ -21,14 +21,9 @@ function constructUrl(jwt, socketUrl) {
 
 export default function connect(jwt, socketUrl=constants.SOCKET_URL) {
   setSupport()
-  try {
-    if (!supportsWebSockets) throw 'WebSockets not supported'
-    const url = constructUrl(jwt, socketUrl)
-    const socket = new Socket
-    socket.connect(url)
-    return socket
-  }
-  catch(err) {
-    console.log(err)
-  }
+  if (!supportsWebSockets) throw 'WebSockets not supported'
+  const url = constructUrl(jwt, socketUrl)
+  const socket = new Socket
+  socket.connect(url)
+  return socket
 }
